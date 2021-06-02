@@ -12,8 +12,7 @@ steps:
       fi
       echo $environment > /workspace/environment.txt
       
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
+- name: 'bash'
   args:
     - '-c'
     - |-
