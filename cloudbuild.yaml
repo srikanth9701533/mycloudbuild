@@ -1,5 +1,5 @@
 steps:
-- name: 'bash'
+- name: bash
   args:
     - '-c'
     - |-
@@ -11,7 +11,7 @@ steps:
       fi
       echo $environment > /workspace/environment.txt
       
-- name: 'bash'
+- name: bash
   args:
     - '-c'
     - |-
