@@ -11,11 +11,10 @@ step:
     fi
       echo $environment > /workspace/environment.txt
 
-=name: bash
-    dir: $_SERVICE_DIR
-    args:
-      - '-c'
-      - |-
-        environment=$(cat /workspace/environment.txt)
-        echo "===== ENV: $environment"
-        docker build --build-arg ENVIRONMENT=$environment -t gcr.io/${_GCR_PROJECT_ID}/sri/${COMMIT_SHA} .
+-name: bash
+ args:
+   - '-c'
+   - |-
+     environment=$(cat /workspace/environment.txt)
+     echo "===== ENV: $environment"
+     docker build --build-arg ENVIRONMENT=$environment -t gcr.io/${_GCR_PROJECT_ID}/sri/${COMMIT_SHA} .
