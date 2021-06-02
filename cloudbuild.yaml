@@ -1,20 +1,23 @@
-step:
--name: bash
- args:
-   - '-c'
-   - |-
-     environment="dev"
-    if [[ "${BRANCH_NAME}" == "staging" ]]; then
-      environment="stg"
-    elif [[ "${BRANCH_NAME}" == "master" ]]; then
-      environment="prd"
-    fi
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |-
+      environment="dev"
+      if [[ "${BRANCH_NAME}" == "staging" ]]; then
+       environment="stg"
+      elif [[ "${BRANCH_NAME}" == "master" ]]; then
+       environment="prd"
+      fi
       echo $environment > /workspace/environment.txt
 
--name: bash
- args:
-   - '-c'
-   - |-
-     environment=$(cat /workspace/environment.txt)
-     echo "===== ENV: $environment"
-     docker build --build-arg ENVIRONMENT=$environment -t gcr.io/${_GCR_PROJECT_ID}/sri/${COMMIT_SHA} .
+- name: bash
+  args:
+    - '-c'
+    - |-
+      environment=$(cat /workspace/environment.txt)
+      echo "===== ENV: $environment"
+      docker build --build-arg ENVIRONMENT=$environment -t us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag3 .
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
