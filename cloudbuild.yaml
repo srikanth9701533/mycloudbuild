@@ -1,17 +1,18 @@
 step:
 -name: bash
-    args:
-      - '-c'
-      - |-
-        environment="dev"
-        if [[ "${BRANCH_NAME}" == "staging" ]]; then
-          environment="stg"
-        elif [[ "${BRANCH_NAME}" == "master" ]]; then
-          environment="prd"
-        fi
-        echo $environment > /workspace/environment.txt
+ args:
+   - '-c'
+   - |-
+     environment="dev"
+    if [[ "${BRANCH_NAME}" == "staging" ]]; then
+      environment="stg"
+    elif [[ "${BRANCH_NAME}" == "master" ]]; then
+      environment="prd"
+    fi
+      echo $environment > /workspace/environment.txt
 
--name: bash
+=name: bash
+    dir: $_SERVICE_DIR
     args:
       - '-c'
       - |-
