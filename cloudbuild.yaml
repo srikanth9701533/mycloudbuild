@@ -1,4 +1,4 @@
-step:
+steps:
 -name: bash
  args:
    - '-c'
