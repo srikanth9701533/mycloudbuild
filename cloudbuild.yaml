@@ -20,3 +20,5 @@ steps:
       environment=$(cat /workspace/environment.txt)
       echo "===== ENV: $environment"
       docker build --build-arg ENVIRONMENT=$environment -t us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag2 .
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag2'
