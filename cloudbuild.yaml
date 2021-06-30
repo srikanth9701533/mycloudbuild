@@ -1,24 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - |-
-      environment="dev"
-      if [[ "${BRANCH_NAME}" == "staging" ]]; then
-       environment="stg"
-      elif [[ "${BRANCH_NAME}" == "master" ]]; then
-       environment="prd"
-      fi
-      echo $environment > /workspace/environment.txt
-
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - |-
-      environment=$(cat /workspace/environment.txt)
-      echo "===== ENV: $environment"
-      docker build --build-arg ENVIRONMENT=$environment -t us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag4 .
-images:
-- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag4'
+  # Install dependencies
+  - name: python
+    entrypoint: pip
+    args: ["install", "-r", "requirements.txt", "--user"]
