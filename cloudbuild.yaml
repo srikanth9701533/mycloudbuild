@@ -2,4 +2,4 @@ steps:
   # Install dependencies
   - name: python:3.8
     entrypoint: python3
-    args: ["install", "-r", "requirements.txt", "--user"]
+    args: ["p.py"]
